@@ -288,7 +288,8 @@ jobs:
           libraries-json: >
             [
               { "whl": "${{ steps.upload_wheel.outputs.dbfs-file-path }}" },
-              { "pypi": "mlflow" }
+              { "pypi": {"package": "mlflow==2.11.3"} },
+              { "pypi": {"package": "pytest==8.1.1"} }
             ]
           # The cluster JSON below is for Azure Databricks. On AWS and GCP, set
           # node_type_id to an appropriate node type, e.g. "i3.xlarge" for
