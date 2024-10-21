@@ -75,12 +75,16 @@ jobs:
             -d 'grant_type=client_credentials' \
             -d 'scope=2ff814a6-3304-4ab8-85cb-cd0e6f879c1d%2F.default' \
             -d 'client_secret=${{ secrets.AZURE_SP_CLIENT_SECRET }}' |  jq -r  '.access_token')" >> $GITHUB_ENV
-            
-      - name: Setup python
-        uses: actions/setup-python@v2
+
+      # Runs a single command using the runners shell
+      - name: Say hello, world
+        run: echo Hello, world!
 
       - name: Get directory (sanity check)
         run: ls
+            
+      #- name: Setup python
+      #  uses: actions/setup-python@v2
         
       #- name: Build wheel
       #  run:
@@ -92,6 +96,20 @@ jobs:
       #  id: upload_wheel
       #  with:
       #    local-path: dist/my-project.whl
+
+      #- name: Azure CLI script
+      #  uses: azure/cli@v2
+      #  with:
+      #    azcliversion: latest
+      #    inlineScript: |
+      #      az account show
+
+      #- name: Azure PowerShell script
+      #  uses: azure/powershell@v2
+      #  with:
+      #    azPSVersion: "latest"
+      #    inlineScript: |
+      #      Get-AzContext
 
       - name: Trigger model training notebook from PR branch
         uses: databricks/run-notebook@v0
@@ -117,24 +135,6 @@ jobs:
                 "permission_level": "CAN_VIEW"
               }
             ]
-
-      - name: Azure CLI script
-        uses: azure/cli@v2
-        with:
-          azcliversion: latest
-          inlineScript: |
-            az account show
-
-      - name: Azure PowerShell script
-        uses: azure/powershell@v2
-        with:
-          azPSVersion: "latest"
-          inlineScript: |
-            Get-AzContext
-
-      # Runs a single command using the runners shell
-      - name: Say hello, world
-        run: echo Hello, world!
 
       ## Runs a set of commands using the runners shell
       #- name: Run a multi-line script
