@@ -1,0 +1,110 @@
+# This is a basic workflow to help you get started with Actions
+
+name: First Workflow
+
+# Controls when the workflow will run
+on:
+
+  ## Triggers the workflow on push or pull request events but only for the "main" branch
+  ##push:
+  #  branches: [ "main" ]
+  ##pull_request:
+  #  branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  DATABRICKS_HOST: https://adb-2085236908470387.7.azuredatabricks.net
+
+permissions:
+  id-token: write
+  pages: write
+  contents: read
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  only-job:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      # This is the secret sauce for getting GitHub to work with Azure
+      # Create an "Enterprise application" (App Registration) in Entra (Azure Databricks)
+      # Create a "Federated Credential" for that App Registration ("bcb3654v1app")
+      # (https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust?pivots=identity-wif-apps-methods-azp#github-actions)
+      # (Certificates and Secrets)
+      # (example: {Organization: brian-brown-improving-com, Repository: github-actions, Entity type: branch, Based on selection: main})
+
+      # AADSTS700213: No matching federated identity record found for presented assertion subject 'repo:brian-brown-improving-com/upload-dbfs-temp:ref:refs/heads/main'. Please note that the matching is done using a case-sensitive comparison. Check your federated identity credential Subject, Audience and Issuer against the presented assertion. https://learn.microsoft.com/entra/workload-id/workload-identity-federation Trace ID: 0b7f071e-562b-413a-a969-3514ff0f0600 Correlation ID: 50ba4580-bd10-4e40-9a78-27c1845fb6c0 Timestamp: 2024-10-21 17:13:36Z
+
+      # Obtain an AAD token and use it to upload to Databricks.
+      # Note: If running on AWS or GCP, you can directly pass your service principal
+      # token via the databricks-host input instead
+      - name: Log into Azure
+        uses: Azure/login@v2
+        with:
+          #auth-type: IDENTITY
+          auth-type: SERVICE_PRINCIPAL
+          # creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          #subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+          #enable-AzPSSession: true
+
+      # Get an AAD token for the service principal,
+      # and store it in the DATABRICKS_TOKEN environment variable for use in subsequent steps.
+      # We set the `resource` parameter to the programmatic ID for Azure Databricks.
+      # See https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/service-prin-aad-token#--get-an-azure-ad-access-token for details.
+      - name: Generate and save AAD token
+        id: generate-token
+        run: |
+          echo "DATABRICKS_TOKEN=$(az account get-access-token \
+          --resource=2ff814a6-3304-4ab8-85cb-cd0e6f879c1d \
+          --query accessToken -o tsv)" >> $GITHUB_ENV
+      - name: Setup python
+        uses: actions/setup-python@v2
+
+      - name: Get directory (sanity check)
+        run: ls
+        
+      #- name: Build wheel
+      #  run:
+      #    python setup.py bdist_wheel
+      # python: can't open file '/home/runner/work/github-actions/github-actions/setup.py': [Errno 2] No such file or directory
+      
+      #- name: Upload wheel
+      #  uses: databricks/upload-dbfs-temp@v0
+      #  id: upload_wheel
+      #  with:
+      #    local-path: dist/my-project.whl
+
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
+
+      - name: Azure PowerShell script
+        uses: azure/powershell@v2
+        with:
+          azPSVersion: "latest"
+          inlineScript: |
+            Get-AzContext
+
+      # Runs a single command using the runners shell
+      - name: Say hello, world
+        run: echo Hello, world!
+
+      ## Runs a set of commands using the runners shell
+      #- name: Run a multi-line script
+      #  run: |
+      #    echo Add other actions to build,
+      #    echo test, and deploy your project.
