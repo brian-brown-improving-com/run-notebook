@@ -77,11 +77,11 @@ jobs:
             -d 'client_secret=${{ secrets.AZURE_SP_CLIENT_SECRET }}' |  jq -r  '.access_token')" >> $GITHUB_ENV
 
       # Runs a single command using the runners shell
-      - name: Say hello, world
+      - name: Say hello, world (sanity check)
         run: echo Hello, world!
 
-      - name: Get directory (sanity check)
-        run: ls
+      #- name: Get directory (sanity check)
+      #  run: ls
             
       #- name: Setup python
       #  uses: actions/setup-python@v2
@@ -142,3 +142,7 @@ jobs:
       #  run: |
       #    echo Add other actions to build,
       #    echo test, and deploy your project.
+
+
+      - name: Say goodbye, world (sanity check)
+        run: echo Goodbye, world!
