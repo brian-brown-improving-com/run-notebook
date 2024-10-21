@@ -19,8 +19,8 @@ env:
 
 permissions:
   id-token: write
-  pages: write
   contents: read
+  #pages: write
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -142,7 +142,6 @@ jobs:
       #  run: |
       #    echo Add other actions to build,
       #    echo test, and deploy your project.
-
 
       - name: Say goodbye, world (sanity check)
         run: echo Goodbye, world!
