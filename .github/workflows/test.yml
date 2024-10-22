@@ -1,10 +1,11 @@
 name: 'build-test'
 on: # rebuild any PRs and main branch changes
-  pull_request:
-  push:
-    branches:
-      - main
-      - 'releases/*'
+  #pull_request:
+  #push:
+  #  branches:
+  #    - main
+  #    - 'releases/*'
+  workflow_dispatch:
 
 jobs:
   build-and-test: # make sure build/ci work properly
