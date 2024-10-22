@@ -119,7 +119,7 @@ jobs:
       - name: Trigger model training notebook from PR branch
         uses: databricks/run-notebook@v0
         with:
-          local-notebook-path: MyMainNotebook
+          local-notebook-path: MyMainNotebook.ipynb
           #local-notebook-path: find-and-run-notebook.ipynb
           
           # If the current workflow is triggered from a PR,
