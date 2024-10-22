@@ -124,7 +124,8 @@ jobs:
           #local-notebook-path: deploy-to-model-serving.ipynb
           #workspace-notebook-path: "Workspace/Repos/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving.ipynb"
           #workspace-notebook-path: ../realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world.ipynb
-          workspace-notebook-path: Workspace/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world.ipynb
+          #workspace-notebook-path: Workspace/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world.ipynb
+          workspace-notebook-path: https://adb-2085236908470387.7.azuredatabricks.net/?o=2085236908470387#notebook/3861965376267849/command/3861965376267850
           
           # If the current workflow is triggered from a PR,
           # run notebook code from the PR's head commit, otherwise use github.sha.
