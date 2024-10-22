@@ -122,7 +122,7 @@ jobs:
           #local-notebook-path: MyMainNotebook.ipynb
           #local-notebook-path: find-and-run-notebook.ipynb
           #local-notebook-path: deploy-to-model-serving.ipynb
-          workspace-notebook-path: /Workspace/Repos/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving
+          workspace-notebook-path: Workspace/Repos/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving
           
           # If the current workflow is triggered from a PR,
           # run notebook code from the PR's head commit, otherwise use github.sha.
