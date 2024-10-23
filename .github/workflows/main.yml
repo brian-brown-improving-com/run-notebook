@@ -130,7 +130,10 @@ jobs:
 
           #local-notebook-path: deploy-to-model-serving.ipynb
 
-          local-notebook-path: "/run-notebook/04 - Real-time Deployment/4.1 - Real-time Deployment with Model Serving - BCB.ipynb"
+          #local-notebook-path: "/run-notebook/04 - Real-time Deployment/4.1 - Real-time Deployment with Model Serving - BCB.ipynb"
+          #fails with "'local-notebook-path' input must be a relative path"
+          
+          local-notebook-path: "/04 - Real-time Deployment/4.1 - Real-time Deployment with Model Serving - BCB"
 
           # using guidance from github.com/databricks/run-notebook/blob/main/action.yml ("ABSOLUTE path in the Databricks workspace"):
           #workspace-notebook-path: "/Repos/run-notebook-repo/run-notebook/hello-world"
