@@ -119,15 +119,14 @@ jobs:
       - name: Trigger model training notebook from PR branch
         uses: databricks/run-notebook@v0
         with:
+        
+          ########## using guidance from github.com/databricks/run-notebook/blob/main/action.yml ##############
           #local-notebook-path: MyMainNotebook.ipynb
           #local-notebook-path: find-and-run-notebook.ipynb
-          local-notebook-path: hello-world.ipynb
-          #workspace-notebook-path: "Workspace/Repos/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving.ipynb"
-          #workspace-notebook-path: Workspace/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world.ipynb
-          #workspace-notebook-path: https://adb-2085236908470387.7.azuredatabricks.net/?o=2085236908470387#notebook/3861965376267849/command/3861965376267850
-          #workspace-notebook-path: "Workspace/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world.ipynb"
-          #workspace-notebook-path: "Workspace/Repos/run-notebook-repo/run-notebook/hello-world.ipynb"
-          #workspace-notebook-path: adb-2085236908470387.7.azuredatabricks.net/browse/folders/3861965376268537?o=2085236908470387
+          #local-notebook-path: hello-world.ipynb
+          workspace-notebook-path: "/Repos/run-notebook-repo/run-notebook/hello-world"
+          #workspace-notebook-path: "/Repos/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving"
+          #workspace-notebook-path: "/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world"
           
           # If the current workflow is triggered from a PR,
           # run notebook code from the PR's head commit, otherwise use github.sha.
