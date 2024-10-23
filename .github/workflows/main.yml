@@ -126,7 +126,7 @@ jobs:
           
           #local-notebook-path: hello-world.ipynb # currently includes attempt to query table in UC via SQL
           
-          #local-notebook-path: find-and-run-notebook.ipynb # calls a notebook in github repo that calls a hello-workd notebook in Databricks repo
+          local-notebook-path: find-and-run-notebook.ipynb # calls a notebook in github repo that calls a hello-workd notebook in Databricks repo
 
           # using guidance from github.com/databricks/run-notebook/blob/main/action.yml ("ABSOLUTE path in the Databricks workspace"):
           #workspace-notebook-path: "/Repos/run-notebook-repo/run-notebook/hello-world"
@@ -136,7 +136,8 @@ jobs:
           #workspace-notebook-path: "/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world"
           # agaijn, fails with "Only RELATIVE paths are currently supported for remote repositories. Paths must not begin with '/'."
 
-          workspace-notebook-path: "Repos/run-notebook-repo/run-notebook/hello-world"
+          #workspace-notebook-path: "Repos/run-notebook-repo/run-notebook/hello-world"
+          # fails with "'workspace-notebook-path' input must be an ABSOLUTE path"
 
           #workspace-notebook-path: "../realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world"
           # fails with "'workspace-notebook-path' input must be an ABSOLUTE path"
