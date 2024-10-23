@@ -120,7 +120,8 @@ jobs:
         uses: databricks/run-notebook@v0
         with:
         
-          ########## 
+          databricks-host: https://adb-2085236908470387.7.azuredatabricks.net/
+          databricks-token: ${{ secrets.DATABRICKS_STAGING_TOKEN }}
           
           #local-notebook-path: MyMainNotebook.ipynb # basically, it's hello, world
           
