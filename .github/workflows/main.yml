@@ -134,9 +134,13 @@ jobs:
           # agaijn, fails with "Only RELATIVE paths are currently supported for remote repositories. Paths must not begin with '/'."
 
           #workspace-notebook-path: "../realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world"
-          # fails with 'workspace-notebook-path' input must be an ABSOLUTE path"
+          # fails with "'workspace-notebook-path' input must be an ABSOLUTE path"
 
-          workspace-notebook-path: "Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world"
+          #workspace-notebook-path: "Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world"
+          # fails with "'workspace-notebook-path' input must be an ABSOLUTE path"
+          
+          workspace-notebook-path: "Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/hello-world.ipynb"
+          # fails with "'workspace-notebook-path' input must be an ABSOLUTE path"
 
           #workspace-notebook-path: "/Repos/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving/deploy-from-github-to-model-serving"
 
