@@ -87,9 +87,21 @@ jobs:
 
       #- name: Get directory (sanity check)
       #  run: ls
-            
-      #- name: Setup python
-      #  uses: actions/setup-python@v2
+    
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 #install the python version needed
+
+      - name: upgrade databricks-cli # (soon to become 'refresh repo in Databricks')
+        env:
+          DATABRICKS_HOST: $(DATABRICKS_HOST)
+          DATABRICKS_TOKEN: $(secrets.DATABRICKS_STAGING_TOKEN)
+        run:
+          python -m pip install --upgrade databricks-cli
+        #run: |
+        #  python -m pip install --upgrade databricks-cli
+        #  databricks repos update --repo-id REPOID-ENTERED --branch "main"
         
       #- name: Build wheel
       #  run:
