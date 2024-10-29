@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 env:
-  DATABRICKS_HOST: https://adb-2085236908470387.7.azuredatabricks.net
+  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
 
 permissions:
   id-token: write
@@ -132,10 +132,8 @@ jobs:
       - name: Trigger model training notebook from PR branch
         uses: databricks/run-notebook@v0
         with:
-          #databricks-host: https://adb-2085236908470387.7.azuredatabricks.net/
-          databricks-token: ${{ secrets.DATABRICKS_STAGING_TOKEN }}
           databricks-host: ${{ secrets.DATABRICKS_HOST }}
-          #databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
+          databricks-token: ${{ secrets.DATABRICKS_STAGING_TOKEN }}
           
           #local-notebook-path: MyMainNotebook.ipynb # basically, it's hello, world
           
