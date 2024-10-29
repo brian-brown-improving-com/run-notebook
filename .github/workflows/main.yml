@@ -76,7 +76,7 @@ jobs:
         run: |
           echo "DATABRICKS_TOKEN=$(curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
             https://login.microsoftonline.com/${{ secrets.AZURE_TENANT_ID }}/oauth2/v2.0/token \
-            -d 'client_id=${{ secrets.AZURE_SP_APPLICATION_ID }}' \
+            -d 'client_id=${{ secrets.AZURE_APPLICATION_ID }}' \
             -d 'grant_type=client_credentials' \
             -d 'scope=2ff814a6-3304-4ab8-85cb-cd0e6f879c1d%2F.default' \
             -d 'client_secret=${{ secrets.AZURE_SP_CLIENT_SECRET }}' |  jq -r  '.access_token')" >> $GITHUB_ENV
@@ -97,12 +97,9 @@ jobs:
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        run:
+        run: |
           python -m pip install --upgrade databricks-cli
-        #  databricks repos update --repo-id ${{ secrets.REPO_ID }} --branch "main"
-        #run: |
-        #  python -m pip install --upgrade databricks-cli
-        #  databricks repos update "/Workspace/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/run-notebook" --branch "main"
+          databricks repos update "/Workspace/Users/realadmin@brianchristopherbrownhotmai.onmicrosoft.com/run-notebook" --branch "main"
         
       #- name: Build wheel
       #  run:
