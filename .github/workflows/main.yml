@@ -116,8 +116,7 @@ jobs:
           databricks-token: ${{ secrets.DATABRICKS_STAGING_TOKEN }}
         run: |
           python -m pip install --upgrade databricks-cli
-          databricks repos update --repo_id ${{ secrets.REPO_ID }} --branch "main"
-        ###### Process completed with exit code 2.
+          databricks repos update --repo-id ${{ secrets.REPO_ID }} --branch "main"
 
       #- name: Build wheel
       #  run:
